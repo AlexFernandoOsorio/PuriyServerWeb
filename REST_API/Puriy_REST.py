@@ -41,8 +41,9 @@ def get_usuario_id(user_id):
     finally:
         cursor.close() 
         conn.close() 
+        
 #GET de un usuario por Email
-@app.route('/api_rest/usuarios/get/email/<String:user_email>')
+@app.route('/api_rest/usuarios/get/email/<string:user_email>')
 def get_usuario_email(user_email):
     try:
         conn = mysql.connect()
