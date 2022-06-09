@@ -15,8 +15,8 @@ def get_usuarios():
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM py_Usuarios")
-        empRows = cursor.fetchall()
-        respone = jsonify(empRows)
+        userRows = cursor.fetchall()
+        respone = jsonify(userRows)
         respone.status_code = 200
         return respone
     except Exception as e:
@@ -32,8 +32,8 @@ def get_usuario_id(user_id):
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
         cursor.execute("SELECT * FROM py_Usuarios WHERE us_idUsuario =%s", user_id)
-        empRow = cursor.fetchone()
-        respone = jsonify(empRow)
+        userRow = cursor.fetchone()
+        respone = jsonify(userRow)
         respone.status_code = 200
         return respone
     except Exception as e:
@@ -41,6 +41,22 @@ def get_usuario_id(user_id):
     finally:
         cursor.close() 
         conn.close() 
+#GET de un usuario por Email
+@app.route('/api_rest/usuarios/get/<String:user_email>')
+def get_usuario_email(user_email):
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+        cursor.execute("SELECT * FROM py_Usuarios WHERE us_correo =%s", user_email)
+        userRow = cursor.fetchone()
+        respone = jsonify(userRow)
+        respone.status_code = 200
+        return respone
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close() 
+        conn.close()
 
 #POST creacion basica de un usuario
 @app.route('/api_rest/usuarios/post', methods=['POST'])
