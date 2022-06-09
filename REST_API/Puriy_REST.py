@@ -9,7 +9,7 @@ from flask import flash, request
 #Bloque de Usuarios
 ################################################################
 #GET de todos los Usuarios
-@app.route('/api_rest/usuarios/get')
+@app.route('/api_rest/usuarios/get/all')
 def get_usuarios():
     try:
         conn = mysql.connect()
@@ -26,7 +26,7 @@ def get_usuarios():
         conn.close()  
 
 #GET de un usuario por ID
-@app.route('/api_rest/usuarios/get/<int:user_id>')
+@app.route('/api_rest/usuarios/get/id/<int:user_id>')
 def get_usuario_id(user_id):
     try:
         conn = mysql.connect()
@@ -42,7 +42,7 @@ def get_usuario_id(user_id):
         cursor.close() 
         conn.close() 
 #GET de un usuario por Email
-@app.route('/api_rest/usuarios/get/<String:user_email>')
+@app.route('/api_rest/usuarios/get/email/<String:user_email>')
 def get_usuario_email(user_email):
     try:
         conn = mysql.connect()
